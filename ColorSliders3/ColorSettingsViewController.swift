@@ -7,9 +7,11 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+ class ColorSettingsViewController: UIViewController {
     
     @IBOutlet weak var colorView: UIView!
+     
+     weak var delegate: ColorSettingsViewControllerDelegate?
     
     @IBOutlet weak var redValueLabel: UILabel!
     @IBOutlet weak var greenValueLabel: UILabel!
@@ -45,13 +47,19 @@ final class ViewController: UIViewController {
         
     }
     
-    private func setColor() {
+     @IBAction func saveButtonPressed() {
+         delegate?.getRGBColor(red: redSlider.value.cgFloat(), green: greenSlider.value.cgFloat(), blue: redSlider.value.cgFloat(), alpha: 1)
+         dismiss(animated: true)
+     }
+     
+     private func setColor() {
         colorView.backgroundColor = UIColor(
             red: redSlider.value.cgFloat(),
             green: greenSlider.value.cgFloat(),
             blue: blueSlider.value.cgFloat(),
             alpha: 1
         )
+    
     }
     
     private func string(from slider: UISlider) -> String {
